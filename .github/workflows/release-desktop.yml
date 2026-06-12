@@ -56,11 +56,6 @@ jobs:
             platform: mac
             target: dmg
             arch: arm64
-          - label: macOS x64
-            runner: macos-13
-            platform: mac
-            target: dmg
-            arch: x64
           - label: Linux x64
             runner: ubuntu-latest
             platform: linux
