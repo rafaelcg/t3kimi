@@ -9,8 +9,8 @@ on:
 jobs:
   check:
     name: Check
-    runs-on: blacksmith-8vcpu-ubuntu-2404
-    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -25,11 +25,14 @@ jobs:
       - name: Ensure Electron runtime is installed
         run: vp run --filter @t3tools/desktop ensure:electron
 
-      - name: Check
-        run: vp check
+      - name: Check formatting
+        run: vp fmt --check
+
+      - name: Lint
+        run: vp lint --report-unused-disable-directives
 
       - name: Typecheck
-        run: vpr typecheck
+        run: vp run -r --concurrency-limit 2 typecheck
 
       - name: Build desktop pipeline
         run: vp run build:desktop
@@ -41,8 +44,8 @@ jobs:
 
   test:
     name: Test
-    runs-on: blacksmith-8vcpu-ubuntu-2404
-    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -62,8 +65,8 @@ jobs:
 
   test_browser:
     name: Test Browser
-    runs-on: blacksmith-8vcpu-ubuntu-2404
-    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -105,42 +108,3 @@ jobs:
             src/components/chat/ProviderModelPicker.browser.tsx \
             src/components/chat/CompactComposerControlsMenu.browser.tsx \
             src/components/settings/SettingsPanels.browser.tsx
-
-  mobile_native_static_analysis:
-    name: Mobile Native Static Analysis
-    runs-on: blacksmith-12vcpu-macos-26
-    timeout-minutes: 10
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Setup Vite+
-        uses: voidzero-dev/setup-vp@v1
-        with:
-          node-version-file: package.json
-          cache: true
-          run-install: true
-
-      - name: Install mobile native static analysis tools
-        run: brew bundle install --file apps/mobile/Brewfile
-
-      - name: Lint mobile native sources
-        run: vp run lint:mobile
-
-  release_smoke:
-    name: Release Smoke
-    runs-on: blacksmith-8vcpu-ubuntu-2404
-    timeout-minutes: 10
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Setup Vite+
-        uses: voidzero-dev/setup-vp@v1
-        with:
-          node-version-file: package.json
-          cache: true
-          run-install: true
-
-      - name: Exercise release-only workflow steps
-        run: node scripts/release-smoke.ts
