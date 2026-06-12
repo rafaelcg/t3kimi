@@ -1,17 +1,23 @@
-# T3 Code
+# T3Kimi
 
-T3 Code is a minimal web GUI for coding agents (currently Codex, Claude, Cursor, and OpenCode, more coming soon).
+A community fork of [T3 Code](https://github.com/pingdotgg/t3code) with added support for **Kimi Code** (Moonshot AI's coding assistant).
+
+T3 Code is a minimal web GUI for coding agents. This fork supports Codex, Claude, Cursor, OpenCode, and Kimi Code.
+
+> [!NOTE]
+> This is not the official T3 Code repository. It is maintained independently to ship Kimi Code support while upstream decides whether to merge the provider. The original project and license remain with [pingdotgg/t3code](https://github.com/pingdotgg/t3code).
 
 ## Installation
 
 > [!WARNING]
-> T3 Code currently supports Codex, Claude, Cursor, and OpenCode.
+> T3Kimi currently supports Codex, Claude, Cursor, OpenCode, and Kimi Code.
 > Install and authenticate at least one provider before use:
 >
 > - Codex: install [Codex CLI](https://developers.openai.com/codex/cli) and run `codex login`
 > - Claude: install [Claude Code](https://claude.com/product/claude-code) and run `claude auth login`
 > - Cursor: install [Cursor CLI](https://cursor.com/cli) and run `cursor-agent login`
 > - OpenCode: install [OpenCode](https://opencode.ai) and run `opencode auth login`
+> - Kimi Code: install [Kimi Code CLI](https://www.moonshot.cn/) and run `kimi login`
 
 ### Run without installing
 
@@ -23,7 +29,7 @@ Tip: Use `npx t3@latest --help` for the full CLI reference.
 
 ### Desktop app
 
-Install the latest version of the desktop app from [GitHub Releases](https://github.com/pingdotgg/t3code/releases), or from your favorite package registry:
+Install the latest version of the desktop app from [GitHub Releases](https://github.com/rafaelcg/t3kimi/releases), or from your favorite package registry:
 
 #### Windows (`winget`)
 
@@ -56,6 +62,7 @@ There's no public docs site yet, checkout the miscellaneous markdown files in [d
 - [Getting started](./docs/getting-started/quick-start.md)
 - [Architecture overview](./docs/architecture/overview.md)
 - [Provider guides](./docs/providers/codex.md)
+  - [Kimi Code](./docs/providers/kimi-code.md)
 - [Operations](./docs/operations/ci.md)
 - [Reference](./docs/reference/encyclopedia.md)
 
